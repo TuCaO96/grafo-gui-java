@@ -178,11 +178,12 @@ public class GrafoGUI extends JFrame implements ActionListener {
 		if (e.getSource() == mSobre) {
 			JOptionPane.showMessageDialog(this,
 				"EDITOR DE GRAFOS\nversão 2019.1\n" +
-				"Interface desenvolvida por: Virgílio Borges de Oliveira.\n" +
+				"Interface desenvolvida por: Arthur Mendonça Ribeiro e Virgílio Borges de Oliveira.\n" +
 				"FACULDADE COTEMIG (somente para fins didáticos)");
 		}
 		
 		if (e.getSource() == mPares) {
+            JOptionPane.showMessageDialog(this, g.paresOrdenados());
 
 		}
 

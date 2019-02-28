@@ -55,18 +55,19 @@ public class Grafo extends GrafoBase {
     public String paresOrdenados() {
         StringBuilder data = new StringBuilder("E = {");
 
-        for (int i = 1; i <= getN(); i++) {
+        for (int i = 0; i < getN(); i++) {
             Vertice verticeAtual = getVertice(i);
 
-            for (int j = 1; j <= getAdjacentes(i).size(); j++) {
-                Vertice verticeAdjecente = getVertice(j);
+            for (int j = 0; j < getAdjacentes(i).size(); j++) {
+                Vertice verticeAdjecente = getVertice(getAdjacentes(i).get(j).getNum());
 
-                if (!verticeAtual.getRotulo().equals(verticeAdjecente.getRotulo())) {
+                if (verticeAtual.getNum() != verticeAdjecente.getNum()) {
                     data.append("(");
                     data.append("V" + i);
                     data.append(",");
                     data.append("V" + j);
                     data.append(")");
+
                     if (i != getN() && j != getAdjacentes(i).size()) {
                         data.append(",");
                     }
@@ -83,10 +84,11 @@ public class Grafo extends GrafoBase {
 
             for (int j = 0; j < getN(); j++) {
                 Vertice vizinho = getVertice(j);
-                Aresta aresta = getAresta(atual.getNum(), vizinho.getNum());
+
                 if (getAresta(atual.getNum(), vizinho.getNum()) == null) {
                     setAresta(atual.getNum(), vizinho.getNum(), 1);
                 }
+
                 if (getAresta(atual.getNum(), vizinho.getNum()).getPeso() == 0) {
                     if (atual.getNum() != vizinho.getNum()) {
                         getAresta(atual.getNum(), vizinho.getNum()).setPeso(1);
