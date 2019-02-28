@@ -63,9 +63,9 @@ public class Grafo extends GrafoBase {
 
                 if (verticeAtual.getNum() != verticeAdjecente.getNum()) {
                     data.append("(");
-                    data.append("V" + i);
+                    data.append(verticeAtual.getRotulo());
                     data.append(",");
-                    data.append("V" + j);
+                    data.append(verticeAdjecente.getRotulo());
                     data.append(")");
 
                     if ((i - 1) != getN() && (j - 1) != getN()) {
