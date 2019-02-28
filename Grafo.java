@@ -13,87 +13,100 @@ import javax.swing.SwingWorker;
  **/
 
 public class Grafo extends GrafoBase {
-	private boolean visitado[];
-	
-	public void AGM(int v) {
-		
-	}
+    private boolean visitado[];
 
-	public void caminhoMinimo(int i, int j) {
-		
-	}
-	
-	public boolean isEuleriano() {
-		int i;
-		//getVertice(1).setCor(Color.BLUE);
-		//getVertice(0).setRotulo("SP");
-		//getAresta(0, 1).setCor(Color.YELLOW);
-		//getAresta(0, 1).setPeso(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o peso:")));
-		for(i = 0; i < this.getN(); i++) {
-			if(this.grau(i) % 2 != 0)
-				return false;
-		}
-		return true;
+    public void AGM(int v) {
+
     }
 
-	public boolean isUnicursal(){
-		int cont = 2;
+    public void caminhoMinimo(int i, int j) {
 
-		for(int i = 0; i < this.getN(); i++){
-			if(grau(i) % 2 != 0){
-				cont--;
-			}
-		}
+    }
 
-		return cont == 0;
-	}
+    public boolean isEuleriano() {
+        int i;
+        //getVertice(1).setCor(Color.BLUE);
+        //getVertice(0).setRotulo("SP");
+        //getAresta(0, 1).setCor(Color.YELLOW);
+        //getAresta(0, 1).setPeso(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o peso:")));
+        for (i = 0; i < this.getN(); i++) {
+            if (this.grau(i) % 2 != 0)
+                return false;
+        }
+        return true;
+    }
 
-	public String paresOrdenados(){
-		StringBuilder data = new StringBuilder("E = {");
+    public boolean isUnicursal() {
+        int cont = 2;
 
-		for(int i = 1; i <= getN(); i++){
-			Vertice verticeAtual = getVertice(i);
+        for (int i = 0; i < this.getN(); i++) {
+            if (grau(i) % 2 != 0) {
+                cont--;
+            }
+        }
 
-			for (int j = 1; j <= getAdjacentes(i).size(); j++){
-				Vertice verticeAdjecente = getVertice(j);
+        if (this.getN() < 1) {
+            return false;
+        }
 
-				if(!verticeAtual.getRotulo().equals(verticeAdjecente.getRotulo())){
-					data.append("(");
-					data.append("V" + i);
-					data.append(",");
-					data.append("V" + j);
-					data.append(")");
-					if(i != getN() && j != getAdjacentes(i).size()){
-						data.append(",");
-					}
-				}
-			}
-		}
+        return cont == 0;
+    }
 
-		return data.append("}").toString();
-	}
+    public String paresOrdenados() {
+        StringBuilder data = new StringBuilder("E = {");
 
-	public void completarGrafo(){
-		for (int i = 0; i < getN(); i++){
-			Vertice atual = getVertice(i);
+        for (int i = 1; i <= getN(); i++) {
+            Vertice verticeAtual = getVertice(i);
 
-			for(int j = 0; j < getAdjacentes(i).size(); j++){
+            for (int j = 1; j <= getAdjacentes(i).size(); j++) {
+                Vertice verticeAdjecente = getVertice(j);
 
-				// TODO: Completar grafo
+                if (!verticeAtual.getRotulo().equals(verticeAdjecente.getRotulo())) {
+                    data.append("(");
+                    data.append("V" + i);
+                    data.append(",");
+                    data.append("V" + j);
+                    data.append(")");
+                    if (i != getN() && j != getAdjacentes(i).size()) {
+                        data.append(",");
+                    }
+                }
+            }
+        }
 
-			}
-		}
+        return data.append("}").toString();
+    }
 
-	}
+    public void completarGrafo() {
+        for (int i = 0; i < getN(); i++) {
+            Vertice atual = getVertice(i);
 
-	public void largura(int v) {
-		
-	}
+            for (int j = 0; j < getN(); j++) {
+                Vertice vizinho = getVertice(j);
+                Aresta aresta = getAresta(atual.getNum(), vizinho.getNum());
+                if (getAresta(atual.getNum(), vizinho.getNum()) == null) {
+                    setAresta(atual.getNum(), vizinho.getNum(), 1);
+                }
+                if (getAresta(atual.getNum(), vizinho.getNum()).getPeso() == 0) {
+                    if (atual.getNum() != vizinho.getNum()) {
+                        getAresta(atual.getNum(), vizinho.getNum()).setPeso(1);
+                    }
+                }
+            }
+        }
 
-	public void numeroCromatico() {
-	}
+        repaint();
 
-	public void profundidade(int v) {
+    }
 
-	}
+    public void largura(int v) {
+
+    }
+
+    public void numeroCromatico() {
+    }
+
+    public void profundidade(int v) {
+
+    }
 }
