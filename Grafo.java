@@ -68,7 +68,7 @@ public class Grafo extends GrafoBase {
                     data.append("V" + j);
                     data.append(")");
 
-                    if (i != getN() && j != getAdjacentes(i).size()) {
+                    if ((i - 1) != getN() && (j - 1) != getN()) {
                         data.append(",");
                     }
                 }
