@@ -25,14 +25,12 @@ public class Grafo extends GrafoBase {
 
     public boolean isEuleriano() {
         int i;
-        //getVertice(1).setCor(Color.BLUE);
-        //getVertice(0).setRotulo("SP");
-        //getAresta(0, 1).setCor(Color.YELLOW);
-        //getAresta(0, 1).setPeso(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o peso:")));
+
         for (i = 0; i < this.getN(); i++) {
             if (this.grau(i) % 2 != 0)
                 return false;
         }
+
         return true;
     }
 
