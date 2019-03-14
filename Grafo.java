@@ -107,6 +107,8 @@ public class Grafo extends GrafoBase {
 
         while(!f.vazia()){
             v = f.desenfileirar();
+            Vertice verticeV = getVertice(v);
+            verticeV.setCor(Color.PINK);
 
             for(int i = 0; i < getN(); i++){
                 Aresta aresta = getAresta(v, i);
@@ -115,9 +117,6 @@ public class Grafo extends GrafoBase {
 
                     f.enfileirar(i);
                     visitado[i] = true;
-
-                    Vertice verticeV = getVertice(v);
-                    verticeV.setCor(Color.PINK);
                 }
             }
         }
