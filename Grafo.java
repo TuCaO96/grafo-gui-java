@@ -13,7 +13,7 @@ import javax.swing.SwingWorker;
  **/
 
 public class Grafo extends GrafoBase {
-    private boolean visitado[];
+    private boolean visitado[] = new boolean[getN()];
 
     public void AGM(int v) {
 
@@ -102,13 +102,31 @@ public class Grafo extends GrafoBase {
     }
 
     public void largura(int v) {
+        Fila f = new Fila(getN());
+        f.enfileirar(v);
 
+        while(!f.vazia()){
+            v = f.desenfileirar();
+
+            for(int i = 0; i < getN(); i++){
+                if(getAresta(v, i) != null && !visitado[i]){
+                    f.enfileirar(i);
+                    visitado[i] = true;
+                }
+            }
+        }
     }
 
     public void numeroCromatico() {
     }
 
     public void profundidade(int v) {
+        visitado[v] = true;
 
+        for(int i = 0; i < getN(); i++){
+            if(getAresta(v, i) != null && !visitado[i]){
+                profundidade(i);
+            }
+        }
     }
 }
