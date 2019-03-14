@@ -109,22 +109,35 @@ public class Grafo extends GrafoBase {
             v = f.desenfileirar();
 
             for(int i = 0; i < getN(); i++){
-                if(getAresta(v, i) != null && !visitado[i]){
+                Aresta aresta = getAresta(v, i);
+                if(aresta != null && !visitado[i]){
+                    aresta.setCor(Color.PINK);
+
                     f.enfileirar(i);
                     visitado[i] = true;
+
+                    Vertice verticeV = getVertice(v);
+                    verticeV.setCor(Color.PINK);
                 }
             }
         }
     }
 
     public void numeroCromatico() {
+
     }
 
     public void profundidade(int v) {
         visitado[v] = true;
 
+        Vertice verticeV = getVertice(v);
+        verticeV.setCor(Color.CYAN);
+
         for(int i = 0; i < getN(); i++){
-            if(getAresta(v, i) != null && !visitado[i]){
+            Aresta aresta = getAresta(v, i);
+
+            if(aresta != null && !visitado[i]){
+                aresta.setCor(Color.CYAN);
                 profundidade(i);
             }
         }
