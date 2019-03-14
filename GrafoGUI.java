@@ -35,6 +35,7 @@ public class GrafoGUI extends JFrame implements ActionListener {
 						mEuleriano,
 						mUnicursal,
 						mProfundidade,
+						mLargura,
                         mCompletarGrafo;
 	
 	Grafo g = new Grafo();
@@ -100,6 +101,10 @@ public class GrafoGUI extends JFrame implements ActionListener {
 		mCompletarGrafo = new JMenuItem("Completar Grafo", KeyEvent.VK_C);
         mCompletarGrafo.addActionListener(this);
 		menu.add(mCompletarGrafo);
+
+		mLargura = new JMenuItem("Largura", KeyEvent.VK_L);
+		mLargura.addActionListener(this);
+		menu.add(mLargura);
 		
 		/*		 
 		 * Complete com as demais opções do menu 
@@ -184,7 +189,6 @@ public class GrafoGUI extends JFrame implements ActionListener {
 		
 		if (e.getSource() == mPares) {
             JOptionPane.showMessageDialog(this, g.paresOrdenados());
-
 		}
 
 		if (e.getSource() == mEuleriano) {
@@ -197,7 +201,34 @@ public class GrafoGUI extends JFrame implements ActionListener {
 			}
 			
 		}
-		
+
+		if(e.getSource() == mProfundidade){
+			g.visitado= new boolean[g.getN()];
+
+			if(g.getVerticeMarcado() == null){
+				JOptionPane.showMessageDialog(this, "É necessário marcar o vértice inicial!");
+				return;
+			}
+
+			g.profundidade(g.getVerticeMarcado().getNum());
+
+			repaint();
+		}
+
+		if(e.getSource() == mLargura){
+
+			g.visitado= new boolean[g.getN()];
+
+			if(g.getVerticeMarcado() == null){
+				JOptionPane.showMessageDialog(this, "É necessário marcar o vértice inicial!");
+				return;
+			}
+
+			g.largura(g.getVerticeMarcado().getNum());
+
+			repaint();
+		}
+
 		if (e.getSource() == mUnicursal) {
 			if(g.isUnicursal()){
                 JOptionPane.showMessageDialog(this, "É Unicursal");

@@ -13,7 +13,7 @@ import javax.swing.SwingWorker;
  **/
 
 public class Grafo extends GrafoBase {
-    private boolean visitado[] = new boolean[getN()];
+    public boolean visitado[];
 
     public void AGM(int v) {
 
