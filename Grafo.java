@@ -23,6 +23,21 @@ public class Grafo extends GrafoBase {
 
     }
 
+    public boolean isArvore(){
+        visitado = new boolean[getN()];
+
+        largura(0);
+
+        //se algum vertice nao tiver sido visitado, entao grafo não é arvore
+        for(int i = 0; i < getN(); i++){
+            if(!visitado[i]){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public boolean isEuleriano() {
         int i;
 

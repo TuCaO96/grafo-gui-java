@@ -32,6 +32,7 @@ public class GrafoGUI extends JFrame implements ActionListener {
 						mSair, 
 						mSobre, 
 						mPares,
+						mArvore,
 						mEuleriano,
 						mUnicursal,
 						mProfundidade,
@@ -93,6 +94,10 @@ public class GrafoGUI extends JFrame implements ActionListener {
 		mUnicursal = new JMenuItem("Grafo Unicursal", KeyEvent.VK_U);
 		mUnicursal.addActionListener(this);
 		menu.add(mUnicursal);
+
+		mArvore = new JMenuItem("Grafo Arvore", KeyEvent.VK_Z);
+		mArvore.addActionListener(this);
+		menu.add(mArvore);
 		
 		mProfundidade = new JMenuItem("Busca em Profundidadee", KeyEvent.VK_P);
 		mProfundidade.addActionListener(this);
@@ -170,6 +175,15 @@ public class GrafoGUI extends JFrame implements ActionListener {
 		
 		if (e.getSource() == mExibPesos) {
 			g.setExibirPesos(mExibPesos.getState());
+		}
+
+		if (e.getSource() == mArvore) {
+			if(!g.isArvore()){
+				JOptionPane.showMessageDialog(this, "Não é Árvore");
+				return;
+			}
+
+			JOptionPane.showMessageDialog(this, "É Árvore");
 		}
 		
 		if (e.getSource() == mPesosAleatorios) {
