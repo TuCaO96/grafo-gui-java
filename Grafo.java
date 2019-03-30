@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -16,6 +17,44 @@ public class Grafo extends GrafoBase {
     public boolean visitado[];
 
     public void AGM(int v) {
+        //cria lista de vertices visitados
+        ArrayList<Integer> listaVisitados = new ArrayList<>();
+        //adiciona o vertice selecionado como primeiro visitado
+        listaVisitados.add(v);
+        Vertice vertice = getVertice(v);
+        vertice.setCor(Color.RED);
+
+        this.setExibirPesos(true);
+
+        //enquanto todos os vertices nao forem visitados
+        while(listaVisitados.size() < getN()){
+            Aresta arestaMaisLeve = null;
+            int proximoVertice = -1;
+            int menorPeso = Integer.MAX_VALUE;
+            //itera por cada vertice visitado
+            for(int i = 0; i < listaVisitados.size(); i++){
+                ArrayList<Vertice> vizinhos = getAdjacentes(v);
+                //pega vizinhos do vertice na iteração atual
+                for(int j = 0; j < vizinhos.size(); j++){
+                    //nao pegar peso de aresta no proprio vertice nem vertice que ja foi visitado
+                    if(i != j && !listaVisitados.contains(j)){
+                        Aresta arestaAtual = getAresta(i, j);
+                        //pega aresta com menor peso
+                        if(arestaAtual.getPeso() < menorPeso){
+                            menorPeso = arestaAtual.getPeso();
+                            arestaMaisLeve = arestaAtual;
+                            proximoVertice = j;
+                        }
+                    }
+                }
+            }
+            //colore aresta e vertice visitados
+            arestaMaisLeve.setCor(Color.RED);
+            Vertice proximoVerticeObj = getVertice(proximoVertice);
+            proximoVerticeObj.setCor(Color.RED);
+            //adiciona vertice visitado à lista
+            listaVisitados.add(proximoVertice);
+        }
 
     }
 
