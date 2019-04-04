@@ -37,6 +37,7 @@ public class GrafoGUI extends JFrame implements ActionListener {
 						mUnicursal,
 						mProfundidade,
 						mLargura,
+						mAgm,
                         mCompletarGrafo;
 	
 	Grafo g = new Grafo();
@@ -107,6 +108,10 @@ public class GrafoGUI extends JFrame implements ActionListener {
         mCompletarGrafo.addActionListener(this);
 		menu.add(mCompletarGrafo);
 
+		mAgm = new JMenuItem("Arvore Geradora Minima", KeyEvent.VK_M);
+		mAgm.addActionListener(this);
+		menu.add(mAgm);
+
 		mLargura = new JMenuItem("Largura", KeyEvent.VK_L);
 		mLargura.addActionListener(this);
 		menu.add(mLargura);
@@ -158,6 +163,10 @@ public class GrafoGUI extends JFrame implements ActionListener {
 				g.abrirArquivo(chooser.getSelectedFile().getAbsoluteFile());
 		    }
 		}
+
+		if(e.getSource() == mAgm){
+			g.AGM(0);
+		}
 		
 		if (e.getSource() == mSalvar) {
 		    JFileChooser chooser = new JFileChooser();
@@ -179,11 +188,11 @@ public class GrafoGUI extends JFrame implements ActionListener {
 
 		if (e.getSource() == mArvore) {
 			if(!g.isArvore()){
-				JOptionPane.showMessageDialog(this, "Não é Árvore");
+				JOptionPane.showMessageDialog(this, "Nao e Arvore");
 				return;
 			}
 
-			JOptionPane.showMessageDialog(this, "É Árvore");
+			JOptionPane.showMessageDialog(this, "E Arvore");
 		}
 		
 		if (e.getSource() == mPesosAleatorios) {

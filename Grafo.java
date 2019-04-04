@@ -20,7 +20,7 @@ public class Grafo extends GrafoBase {
         //cria lista de vertices visitados
         ArrayList<Integer> listaVisitados = new ArrayList<>();
         //adiciona o vertice selecionado como primeiro visitado
-        listaVisitados.add(v);
+        listaVisitados.add(getVertice(v).getNum());
         Vertice vertice = getVertice(v);
         vertice.setCor(Color.RED);
 
@@ -31,29 +31,34 @@ public class Grafo extends GrafoBase {
             Aresta arestaMaisLeve = null;
             int proximoVertice = -1;
             int menorPeso = Integer.MAX_VALUE;
+
             //itera por cada vertice visitado
             for(int i = 0; i < listaVisitados.size(); i++){
-                ArrayList<Vertice> vizinhos = getAdjacentes(v);
+                ArrayList<Vertice> vizinhos = getAdjacentes(i);
                 //pega vizinhos do vertice na iteração atual
                 for(int j = 0; j < vizinhos.size(); j++){
                     //nao pegar peso de aresta no proprio vertice nem vertice que ja foi visitado
-                    if(i != j && !listaVisitados.contains(j)){
-                        Aresta arestaAtual = getAresta(i, j);
+                    if(!listaVisitados.contains(vizinhos.get(j).getNum())){
+                        Aresta arestaAtual = getAresta(i, vizinhos.get(j).getNum());
                         //pega aresta com menor peso
-                        if(arestaAtual.getPeso() < menorPeso){
+                        if(arestaAtual != null && (arestaAtual.getPeso() < menorPeso)){
                             menorPeso = arestaAtual.getPeso();
+
                             arestaMaisLeve = arestaAtual;
-                            proximoVertice = j;
+                            proximoVertice = vizinhos.get(j).getNum();
                         }
                     }
                 }
             }
-            //colore aresta e vertice visitados
-            arestaMaisLeve.setCor(Color.RED);
-            Vertice proximoVerticeObj = getVertice(proximoVertice);
-            proximoVerticeObj.setCor(Color.RED);
-            //adiciona vertice visitado à lista
-            listaVisitados.add(proximoVertice);
+
+            if(proximoVertice != -1){
+                //colore aresta e vertice visitados
+                arestaMaisLeve.setCor(Color.RED);
+                Vertice proximoVerticeObj = getVertice(proximoVertice);
+                proximoVerticeObj.setCor(Color.RED);
+                //adiciona vertice visitado à lista
+                listaVisitados.add(proximoVertice);
+            }
         }
 
     }
