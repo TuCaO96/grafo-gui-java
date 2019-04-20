@@ -38,6 +38,7 @@ public class GrafoGUI extends JFrame implements ActionListener {
 						mProfundidade,
 						mLargura,
 						mAgm,
+						mNumCromatico,
                         mCompletarGrafo;
 	
 	Grafo g = new Grafo();
@@ -112,6 +113,10 @@ public class GrafoGUI extends JFrame implements ActionListener {
 		mAgm.addActionListener(this);
 		menu.add(mAgm);
 
+		mNumCromatico = new JMenuItem("Numero Cromatico");
+		mNumCromatico.addActionListener(this);
+		menu.add(mNumCromatico);
+
 		mLargura = new JMenuItem("Largura", KeyEvent.VK_L);
 		mLargura.addActionListener(this);
 		menu.add(mLargura);
@@ -166,6 +171,18 @@ public class GrafoGUI extends JFrame implements ActionListener {
 
 		if(e.getSource() == mAgm){
 			g.AGM(0);
+		}
+
+		if(e.getSource() == mNumCromatico){
+			g.visitado= new boolean[g.getN()];
+
+			if(g.getVerticeMarcado() == null){
+				JOptionPane.showMessageDialog(this, "É necessário marcar o vértice inicial!");
+				return;
+			}
+
+			g.numeroCromatico(g.getVerticeMarcado().getNum());
+			JOptionPane.showMessageDialog(this, "Numero Cromatico:" + g.numCromatico);
 		}
 		
 		if (e.getSource() == mSalvar) {

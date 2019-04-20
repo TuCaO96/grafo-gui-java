@@ -189,7 +189,7 @@ public class Grafo extends GrafoBase {
         //pega cor 1 (vermelho)
         int selecionarCor = 1;
 
-        for(int i = 1; i <= vizinhos.size(); i++){
+        for(int i = 0; i < vizinhos.size(); i++){
             Vertice verticeVizinho = vizinhos.get(i);
             if(verticeVizinho.getCor() == Color.red){
                 selecionarCor = 2;
@@ -200,10 +200,10 @@ public class Grafo extends GrafoBase {
             if(verticeVizinho.getCor() == Color.blue){
                 selecionarCor = 4;
             }
-        }
 
-        if(this.numCromatico < selecionarCor){
-            this.numCromatico = selecionarCor;
+            if(this.numCromatico < selecionarCor){
+                this.numCromatico = selecionarCor;
+            }
         }
 
         switch (selecionarCor){
