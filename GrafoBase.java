@@ -1,7 +1,7 @@
 /* FACULDADE COTEMIG
  * TRABALHO PRATICO - ALGORITMOS E ESTRUTURAS DE DADOS II
  * EDITOR DE GRAFOS
- * REVISÃO: 2019.1
+ * REVISï¿½O: 2019.1
  * AUTOR: prof. VIRGILIO BORGES DE OLIVEIRA
  * DATA DA ULTIMA ALTERACAO: 26/02/2019
  **/
@@ -26,16 +26,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public abstract class GrafoBase extends JPanel implements MouseListener {
-	private int n; // número de vértices
-	private LinkedList<Vertice> vertices; // lista de vértices
-	private Aresta matAdj[][]; // matriz de adjacências
+	private int n; // nï¿½mero de vï¿½rtices
+	private LinkedList<Vertice> vertices; // lista de vï¿½rtices
+	private Aresta matAdj[][]; // matriz de adjacï¿½ncias
 	private Vertice vMarcado;
 	private boolean exibirPesos, pesosAleatorios;
 
 	public GrafoBase() {
 		setLayout(null);
 		n = 0;
-		vertices = new LinkedList<Vertice>(); // inicializa a lista de vértices		
+		vertices = new LinkedList<Vertice>(); // inicializa a lista de vï¿½rtices		
 		vMarcado = null;
 		matAdj = new Aresta[500][500];
 		exibirPesos = false;
@@ -60,7 +60,7 @@ public abstract class GrafoBase extends JPanel implements MouseListener {
 		return pesosAleatorios;
 	}
 	
-	/* Retorna o objeto Vertice referente ao nº passado */
+	/* Retorna o objeto Vertice referente ao nï¿½ passado */
 	public Vertice getVertice(int v) {
 		int i;
 		Vertice aux;
@@ -131,12 +131,12 @@ public abstract class GrafoBase extends JPanel implements MouseListener {
 		int x = e.getX(), // coordenada X do clique do mouse
 		y = e.getY(); // coordenada Y do clique do mouse
 
-		/* ADICIONA O VÉRTICE v NA TELA, NAS COORDENADAS x,y DO CLICK MOUSE */
+		/* ADICIONA O Vï¿½RTICE v NA TELA, NAS COORDENADAS x,y DO CLICK MOUSE */
 		addVertice(n, "V" + (n + 1), x, y);
 		n++;
 	}
 
-	/* DEMAIS EVENTOS DO MOUSE (não mexer) */
+	/* DEMAIS EVENTOS DO MOUSE (nï¿½o mexer) */
 	public void mouseReleased(MouseEvent e) {}
 	public void mouseEntered(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}
@@ -144,7 +144,7 @@ public abstract class GrafoBase extends JPanel implements MouseListener {
 	
 	/* EVENTOS DO GRAFO */
 	public void addVertice(int n, String r, int x, int y) {
-		Vertice v = new Vertice(n, r, x, y); // cria novo vértice 
+		Vertice v = new Vertice(n, r, x, y); // cria novo vï¿½rtice 
 		v.addMouseMotionListener(new MouseMotionAdapter() {
 			public void mouseDragged(MouseEvent e) {
 				Vertice v = (Vertice) e.getSource();
@@ -159,14 +159,14 @@ public abstract class GrafoBase extends JPanel implements MouseListener {
 		});			
 		v.setToolTipText(v.getRotulo());
 		if(adicionouVertice(v)) {
-			vertices.add(v); // adiciona a lista de vértices
+			vertices.add(v); // adiciona a lista de vï¿½rtices
 			this.add(v);
 		}
 	}
 	
 	public boolean adicionouVertice(Vertice v) {
 		System.out.println("[DEBUG] => Novo vertice: " + v);
-		//v.setRotulo(JOptionPane.showInputDialog("Digite o rótulo do vértice:"));
+		//v.setRotulo(JOptionPane.showInputDialog("Digite o rï¿½tulo do vï¿½rtice:"));
 		return true;
 	}
 
@@ -208,7 +208,7 @@ public abstract class GrafoBase extends JPanel implements MouseListener {
 	
 	public void limpar() {
 		n = 0;
-		vertices.clear(); // limpa a lista de vértices
+		vertices.clear(); // limpa a lista de vï¿½rtices
 		vMarcado = null; // limpa a referencia a qualquer vertice marcado
 		matAdj = new Aresta[500][500];		
 		this.removeAll();
@@ -320,5 +320,5 @@ public abstract class GrafoBase extends JPanel implements MouseListener {
 	public abstract void largura(int v);
 	public abstract void AGM(int v);
 	public abstract void caminhoMinimo(int i, int j);
-	public abstract void numeroCromatico();	
+	public abstract void numeroCromatico(int v);
 }

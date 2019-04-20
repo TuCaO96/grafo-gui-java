@@ -15,6 +15,7 @@ import javax.swing.SwingWorker;
 
 public class Grafo extends GrafoBase {
     public boolean visitado[];
+    public int numCromatico;
 
     public void AGM(int v) {
         //cria lista de vertices visitados
@@ -179,8 +180,50 @@ public class Grafo extends GrafoBase {
         }
     }
 
-    public void numeroCromatico() {
+    public void numeroCromatico(int v) {
+        visitado[v] = true;
 
+        Vertice vertice = getVertice(v);
+        ArrayList<Vertice> vizinhos = getAdjacentes(v);
+
+        //pega cor 1 (vermelho)
+        int selecionarCor = 1;
+
+        for(int i = 1; i <= vizinhos.size(); i++){
+            Vertice verticeVizinho = vizinhos.get(i);
+            if(verticeVizinho.getCor() == Color.red){
+                selecionarCor = 2;
+            }
+            if(verticeVizinho.getCor() == Color.green){
+                selecionarCor = 3;
+            }
+            if(verticeVizinho.getCor() == Color.blue){
+                selecionarCor = 4;
+            }
+        }
+
+        if(this.numCromatico < selecionarCor){
+            this.numCromatico = selecionarCor;
+        }
+
+        switch (selecionarCor){
+            case 1:
+                vertice.setCor(Color.RED);
+            case 2:
+                vertice.setCor(Color.GREEN);
+            case 3:
+                vertice.setCor(Color.BLUE);
+            case 4:
+                vertice.setCor(Color.CYAN);
+        }
+
+        for(int i = 0; i < getN(); i++){
+            Aresta aresta = getAresta(v, i);
+
+            if(aresta != null && !visitado[i]){
+                numeroCromatico(i);
+            }
+        }
     }
 
     public void profundidade(int v) {
