@@ -170,7 +170,16 @@ public class GrafoGUI extends JFrame implements ActionListener {
 		}
 
 		if(e.getSource() == mAgm){
-			g.AGM(0);
+			g.visitado= new boolean[g.getN()];
+
+			if(g.getVerticeMarcado() == null){
+				JOptionPane.showMessageDialog(this, "É necessário marcar o vértice inicial!");
+				return;
+			}
+
+			g.AGM(g.getVerticeMarcado().getNum());
+
+			JOptionPane.showMessageDialog(this, "Custo Total: " + g.custoTotal);
 		}
 
 		if(e.getSource() == mNumCromatico){
@@ -182,7 +191,7 @@ public class GrafoGUI extends JFrame implements ActionListener {
 			}
 
 			g.numeroCromatico(g.getVerticeMarcado().getNum());
-			JOptionPane.showMessageDialog(this, "Numero Cromatico:" + g.numCromatico);
+			JOptionPane.showMessageDialog(this, "Numero Cromatico: " + g.numCromatico);
 		}
 		
 		if (e.getSource() == mSalvar) {

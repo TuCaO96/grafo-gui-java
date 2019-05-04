@@ -16,6 +16,7 @@ import javax.swing.SwingWorker;
 public class Grafo extends GrafoBase {
     public boolean visitado[];
     public int numCromatico;
+    public int custoTotal;
 
     public void AGM(int v) {
         //cria lista de vertices visitados
