@@ -188,35 +188,51 @@ public class Grafo extends GrafoBase {
 
         //pega cor 1 (vermelho)
         int selecionarCor = 1;
+        //necessario para tratar caso de erro na logica inicial
+        boolean vizinhoCor1 = false;
 
+        //verifica se os vizinhos ja tem alguma cor marcada, para definir a cor do vertice atual de acordo
+        //se tem vizinho de cor 1, 2 por exemplo: o vertice atual terá cor 3
         for(int i = 0; i < vizinhos.size(); i++){
             Vertice verticeVizinho = vizinhos.get(i);
+
             if(verticeVizinho.getCor() == Color.red){
                 selecionarCor = 2;
+                vizinhoCor1 = true;
             }
-            if(verticeVizinho.getCor() == Color.green){
+            else if(verticeVizinho.getCor() == Color.green){
                 selecionarCor = 3;
             }
-            if(verticeVizinho.getCor() == Color.blue){
+            else if(verticeVizinho.getCor() == Color.blue){
                 selecionarCor = 4;
             }
 
+            //o numero cromatico será definido na classe grafo, para poder ser exibido na chamada do alert no grafoGUI
             if(this.numCromatico < selecionarCor){
                 this.numCromatico = selecionarCor;
             }
         }
 
-        switch (selecionarCor){
-            case 1:
+        //seta cor do vertice
+        if(selecionarCor == 1){
+            vertice.setCor(Color.RED);
+        }
+        else if(selecionarCor == 2){
+            vertice.setCor(Color.GREEN);
+        }
+        else if(selecionarCor == 3){
+            vertice.setCor(Color.BLUE);
+        }
+        else if(selecionarCor == 4){
+            vertice.setCor(Color.CYAN);
+            //pode acontecer de ter vizinho de cor verde, azul e ciano. nesse caso, iria falhar e colocar ciano.
+            //corrige falha e seta de cor vermelha como deveria ser
+            if(vizinhoCor1 == false){
                 vertice.setCor(Color.RED);
-            case 2:
-                vertice.setCor(Color.GREEN);
-            case 3:
-                vertice.setCor(Color.BLUE);
-            case 4:
-                vertice.setCor(Color.CYAN);
+            }
         }
 
+        //tudo certo com o vertice, prosseggue atraves da profundidade para verificar os outros
         for(int i = 0; i < getN(); i++){
             Aresta aresta = getAresta(v, i);
 
