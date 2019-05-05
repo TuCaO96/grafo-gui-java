@@ -11,7 +11,7 @@ import java.awt.Graphics;
 
 import javax.swing.JComponent;
 
-public class Vertice extends JComponent {
+public class Vertice extends JComponent implements Comparable<Vertice> {
 	private String rotulo; // rótulo (legenda) do vértice
 	private int numero; // nº do vértice
 	private boolean marcado; // define se o vértice está marcado ou não
@@ -148,5 +148,18 @@ public class Vertice extends JComponent {
 	public void addNotify() {
 		super.addNotify();
 		this.getRootPane().repaint();
+	}
+
+
+	@Override
+	public int compareTo(Vertice o) {
+		if(this.estimativa < o.estimativa){
+			return -1;
+		}
+		else if(this.estimativa == o.estimativa){
+			return 0;
+		}
+
+		return 1;
 	}
 }

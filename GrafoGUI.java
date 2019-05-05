@@ -188,7 +188,15 @@ public class GrafoGUI extends JFrame implements ActionListener {
 		}
 
 		if(e.getSource() == mCaminhoMinimo){
+			if(g.getVerticeMarcado() == null){
+				JOptionPane.showMessageDialog(this, "É necessário marcar o vértice inicial!");
+				return;
+			}
 
+			g.caminhoMinimo(0, g.getVerticeMarcado().getNum());
+			g.setVerticeMarcado(null);
+
+			JOptionPane.showMessageDialog(this, "Custo Minimo: " + g.custoMinimo);
 		}
 
 		if(e.getSource() == mNumCromatico){

@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
@@ -17,6 +18,7 @@ public class Grafo extends GrafoBase {
     public boolean visitado[];
     public int numCromatico;
     public int custoTotal;
+    public int custoMinimo;
 
     public void AGM(int v) {
         //cria lista de vertices visitados
@@ -67,13 +69,90 @@ public class Grafo extends GrafoBase {
     }
 
     public void caminhoMinimo(int i, int j) {
-        //começamos do vertice i, e vamos analisando seus vizinhos um a um ate chegar no vertice j
-        Vertice vertice = getVertice(i);
-        Vertice verticeFinal = getVertice(j);
+        Vertice v1 = getVertice(i);
+        Vertice v2 = getVertice(j);
 
-        while (!verticeFinal.isTerminado()){
+        //lista de vertices ainda nao visitados
+        ArrayList<Vertice> naoVisitados = new ArrayList<>();
+        ArrayList<Vertice> caminhoMinimo = new ArrayList<>();
 
+        //ja adiciona vertice inicial como item da lista de vertices do caminho minimo
+        caminhoMinimo.add(v1);
+
+        //coloca as distancias iniciais
+        //o vertice inicial tem estimativa 0, os outros por enquanto infinito
+        for(int index = 0; index < getN(); index++){
+            if(getVertice(index).getNum() == v1.getNum()){
+                v1.setEstimativa(0);
+            }
+            else{
+                getVertice(index).setEstimativa(Integer.MAX_VALUE);
+            }
+            naoVisitados.add(getVertice(index));
         }
+
+        //implementei o Comparable na classe Vertice para poder assim fazer um sort na lista
+        //onde será comparado a estimativa, colocando as menores estimativas primeiro
+        Collections.sort(naoVisitados);
+
+        //itera enquanto o vertice final nao for visitado
+        while(!naoVisitados.isEmpty()){
+            //pega sempre vertice com menor estimativa
+            Vertice atual = naoVisitados.get(0);
+            //busca vizinhos do vertice atual
+            ArrayList<Vertice> vizinhosAtual = getAdjacentes(atual.getNum());
+
+            for(int index = 0; index < vizinhosAtual.size(); index++){
+                Vertice vizinhoAtual = vizinhosAtual.get(index);
+
+                //se nao foi visitado, busca menos estimativa
+                if(!vizinhoAtual.isTerminado()){
+                    Aresta arestaAtual = getAresta(atual.getNum(), vizinhoAtual.getNum());
+                    //compara estimativa do vizinho com a estimativa do vertice atual ate ele
+                    if(vizinhoAtual.getEstimativa() > (atual.getEstimativa() + arestaAtual.getPeso())){
+                        //se for menor, a estimativa do vertice atual com o peso da aresta eh a nova estimativa
+                        //para o vizinho atual
+                        vizinhoAtual.setEstimativa(atual.getEstimativa() + arestaAtual.getPeso());
+                        vizinhoAtual.setAnterior(atual);
+
+                        //se o vizinho eh o vertice final, altera caminho minimo
+                        //pois um caminho menor foi encontrado
+                        if(vizinhoAtual.getNum() == v2.getNum()){
+                            caminhoMinimo.clear();
+                            caminhoMinimo.add(vizinhoAtual);
+                            Vertice verticeCaminho = vizinhoAtual;
+
+                            while(verticeCaminho.getAnterior() != null){
+                                caminhoMinimo.add(verticeCaminho.getAnterior());
+                                verticeCaminho = verticeCaminho.getAnterior();
+                            }
+
+                            //ordena a lista de vertices do caminho para que sejam coloridos atraves da menor distancia
+                            Collections.sort(caminhoMinimo);
+                        }
+                    }
+                }
+            }
+
+            //marca como visitado o vertice atual
+            atual.setTerminado(true);
+            naoVisitados.remove(atual);
+
+            //ordena novamente lista de nao visitados
+            Collections.sort(naoVisitados);
+        }
+
+        //colore vertices do caminho minimo
+        caminhoMinimo.forEach(vertice -> {
+            vertice.setCor(Color.RED);
+
+            if(vertice.getNum() == v2.getNum()){
+                custoMinimo = vertice.getEstimativa();
+            }
+
+        });
+
+        this.setExibirPesos(true);
     }
 
     public boolean isArvore(){
