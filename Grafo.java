@@ -45,6 +45,7 @@ public class Grafo extends GrafoBase {
                         //pega aresta com menor peso
                         if(arestaAtual != null && (arestaAtual.getPeso() < menorPeso)){
                             menorPeso = arestaAtual.getPeso();
+                            custoTotal += arestaAtual.getPeso();
 
                             arestaMaisLeve = arestaAtual;
                             proximoVertice = vizinhos.get(j).getNum();
