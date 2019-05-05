@@ -15,6 +15,9 @@ public class Vertice extends JComponent {
 	private String rotulo; // rótulo (legenda) do vértice
 	private int numero; // nº do vértice
 	private boolean marcado; // define se o vértice está marcado ou não
+	private int estimativa;
+	private Vertice anterior;
+	private boolean terminado;
 	private Color cor; // cor do vértice desmarcado
 	private Color corMarcado; // cor do vértice marcado
 
@@ -23,9 +26,35 @@ public class Vertice extends JComponent {
 		this.numero = num;
 		this.marcado = false;
 		this.cor = Color.darkGray; // define a cor padrão 
-		this.corMarcado = Color.MAGENTA; // define a cor do vértice marcado 
+		this.corMarcado = Color.MAGENTA; // define a cor do vértice marcado
+		this.terminado = false;
+		this.estimativa = -1;
 		setVisible(true);
 		setXY(x, y);
+	}
+
+	public int getEstimativa() {
+		return estimativa;
+	}
+
+	public void setEstimativa(int estimativa) {
+		this.estimativa = estimativa;
+	}
+
+	public Vertice getAnterior() {
+		return anterior;
+	}
+
+	public void setAnterior(Vertice anterior) {
+		this.anterior = anterior;
+	}
+
+	public boolean isTerminado() {
+		return terminado;
+	}
+
+	public void setTerminado(boolean terminado) {
+		this.terminado = terminado;
 	}
 
 	public void setXY(int x, int y) {

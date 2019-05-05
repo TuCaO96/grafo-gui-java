@@ -67,7 +67,13 @@ public class Grafo extends GrafoBase {
     }
 
     public void caminhoMinimo(int i, int j) {
-//        TODO: Ver https://github.com/fellipecouto96/awesome-dijkstra/blob/master/awesome-dijkstra/src/GrafoUtil.java
+        //começamos do vertice i, e vamos analisando seus vizinhos um a um ate chegar no vertice j
+        Vertice vertice = getVertice(i);
+        Vertice verticeFinal = getVertice(j);
+
+        while (!verticeFinal.isTerminado()){
+
+        }
     }
 
     public boolean isArvore(){

@@ -39,6 +39,7 @@ public class GrafoGUI extends JFrame implements ActionListener {
 						mLargura,
 						mAgm,
 						mNumCromatico,
+						mCaminhoMinimo,
                         mCompletarGrafo;
 	
 	Grafo g = new Grafo();
@@ -117,6 +118,10 @@ public class GrafoGUI extends JFrame implements ActionListener {
 		mNumCromatico.addActionListener(this);
 		menu.add(mNumCromatico);
 
+		mCaminhoMinimo = new JMenuItem("Caminho Mínimo");
+		mCaminhoMinimo.addActionListener(this);
+		menu.add(mCaminhoMinimo);
+
 		mLargura = new JMenuItem("Largura", KeyEvent.VK_L);
 		mLargura.addActionListener(this);
 		menu.add(mLargura);
@@ -180,6 +185,10 @@ public class GrafoGUI extends JFrame implements ActionListener {
 			g.AGM(g.getVerticeMarcado().getNum());
 
 			JOptionPane.showMessageDialog(this, "Custo Total: " + g.custoTotal);
+		}
+
+		if(e.getSource() == mCaminhoMinimo){
+
 		}
 
 		if(e.getSource() == mNumCromatico){
