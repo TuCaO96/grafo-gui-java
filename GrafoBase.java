@@ -314,11 +314,12 @@ public abstract class GrafoBase extends JPanel implements MouseListener {
 	
 	public abstract boolean isEuleriano();
 	public abstract boolean isUnicursal();
-	public abstract String paresOrdenados();	
+	public abstract boolean isArvore();
+	public abstract String paresOrdenados();
 	public abstract void completarGrafo();	
 	public abstract void profundidade(int v);
 	public abstract void largura(int v);
-	public abstract void AGM(int v);
-	public abstract void caminhoMinimo(int i, int j);
-	public abstract void numeroCromatico(int v);
+	public abstract int AGM(int v);
+	public abstract int caminhoMinimo(int i, int j);
+	public abstract int numeroCromatico(int v);
 }

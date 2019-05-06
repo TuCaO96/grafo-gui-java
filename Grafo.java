@@ -16,11 +16,9 @@ import javax.swing.SwingWorker;
 
 public class Grafo extends GrafoBase {
     public boolean visitado[];
-    public int numCromatico;
-    public int custoTotal;
-    public int custoMinimo;
 
-    public void AGM(int v) {
+    public int AGM(int v) {
+        int custoTotal = Integer.MAX_VALUE;
         //cria lista de vertices visitados
         ArrayList<Integer> listaVisitados = new ArrayList<>();
         //adiciona o vertice selecionado como primeiro visitado
@@ -66,9 +64,11 @@ public class Grafo extends GrafoBase {
             }
         }
 
+        return custoTotal;
     }
 
-    public void caminhoMinimo(int i, int j) {
+    public int caminhoMinimo(int i, int j) {
+        int custoMinimo = Integer.MAX_VALUE;
         Vertice v1 = getVertice(i);
         Vertice v2 = getVertice(j);
 
@@ -143,16 +143,19 @@ public class Grafo extends GrafoBase {
         }
 
         //colore vertices do caminho minimo
-        caminhoMinimo.forEach(vertice -> {
+        for(int index = 0; index < caminhoMinimo.size(); i++){
+            Vertice vertice = caminhoMinimo.get(i);
             vertice.setCor(Color.RED);
 
             if(vertice.getNum() == v2.getNum()){
                 custoMinimo = vertice.getEstimativa();
             }
+        }
 
-        });
 
         this.setExibirPesos(true);
+
+        return custoMinimo;
     }
 
     public boolean isArvore(){
@@ -267,7 +270,8 @@ public class Grafo extends GrafoBase {
         }
     }
 
-    public void numeroCromatico(int v) {
+    public int numeroCromatico(int v) {
+        int numCromatico = 0;
         visitado[v] = true;
 
         Vertice vertice = getVertice(v);
@@ -295,8 +299,8 @@ public class Grafo extends GrafoBase {
             }
 
             //o numero cromatico será definido na classe grafo, para poder ser exibido na chamada do alert no grafoGUI
-            if(this.numCromatico < selecionarCor){
-                this.numCromatico = selecionarCor;
+            if(numCromatico < selecionarCor){
+                numCromatico = selecionarCor;
             }
         }
 
@@ -327,6 +331,8 @@ public class Grafo extends GrafoBase {
                 numeroCromatico(i);
             }
         }
+
+        return numCromatico;
     }
 
     public void profundidade(int v) {

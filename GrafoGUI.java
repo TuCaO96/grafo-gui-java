@@ -182,9 +182,9 @@ public class GrafoGUI extends JFrame implements ActionListener {
 				return;
 			}
 
-			g.AGM(g.getVerticeMarcado().getNum());
+			JOptionPane.showMessageDialog(this, "Custo Total: " + g.AGM(g.getVerticeMarcado().getNum()));
 
-			JOptionPane.showMessageDialog(this, "Custo Total: " + g.custoTotal);
+			g.setVerticeMarcado(null);
 		}
 
 		if(e.getSource() == mCaminhoMinimo){
@@ -193,10 +193,9 @@ public class GrafoGUI extends JFrame implements ActionListener {
 				return;
 			}
 
-			g.caminhoMinimo(0, g.getVerticeMarcado().getNum());
-			g.setVerticeMarcado(null);
+			JOptionPane.showMessageDialog(this, "Custo Minimo: " + g.caminhoMinimo(0, g.getVerticeMarcado().getNum()));
 
-			JOptionPane.showMessageDialog(this, "Custo Minimo: " + g.custoMinimo);
+			g.setVerticeMarcado(null);
 		}
 
 		if(e.getSource() == mNumCromatico){
@@ -207,8 +206,9 @@ public class GrafoGUI extends JFrame implements ActionListener {
 				return;
 			}
 
-			g.numeroCromatico(g.getVerticeMarcado().getNum());
-			JOptionPane.showMessageDialog(this, "Numero Cromatico: " + g.numCromatico);
+			JOptionPane.showMessageDialog(this, "Numero Cromatico: " + g.numeroCromatico(g.getVerticeMarcado().getNum()));
+
+			g.setVerticeMarcado(null);
 		}
 		
 		if (e.getSource() == mSalvar) {
