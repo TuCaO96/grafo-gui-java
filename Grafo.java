@@ -259,12 +259,12 @@ public class Grafo extends GrafoBase {
         while(!f.vazia()){
             v = f.desenfileirar();
             Vertice verticeV = getVertice(v);
-            verticeV.setCor(Color.PINK);
+            verticeV.setCor(Color.ORANGE);
 
             for(int i = 0; i < getN(); i++){
                 Aresta aresta = getAresta(v, i);
                 if(aresta != null && !visitado[i]){
-                    aresta.setCor(Color.PINK);
+                    aresta.setCor(Color.ORANGE);
 
                     f.enfileirar(i);
                     visitado[i] = true;
@@ -279,25 +279,66 @@ public class Grafo extends GrafoBase {
         Vertice vertice = getVertice(v);
         ArrayList<Vertice> vizinhos = getAdjacentes(v);
 
+        vizinhos.sort((vertice1, t1) -> {
+            int corV1 = 0, corV2 = 0;
+
+            if(vertice1.getCor() == Color.red){
+                corV1 = 1;
+            }
+            else if(vertice1.getCor() == Color.green){
+                corV1 = 2;
+            }
+            else if(vertice1.getCor() == Color.blue){
+                corV1 = 3;
+            }
+            else if(vertice1.getCor() == Color.cyan){
+                corV1 = 4;
+            }
+
+            if(t1.getCor() == Color.red){
+                corV2 = 1;
+            }
+            else if(t1.getCor() == Color.green){
+                corV2 = 2;
+            }
+            else if(t1.getCor() == Color.blue){
+                corV2 = 3;
+            }
+            else if(t1.getCor() == Color.cyan){
+                corV2 = 4;
+            }
+
+            if(corV2 > corV1){
+                return -1;
+            }
+            else if(corV2 == corV1){
+                return 0;
+            }
+
+            return 1;
+        });
+
+        vertice.setCor(Color.RED);
+
         //pega cor 1 (vermelho)
         int selecionarCor = 1;
-        //necessario para tratar caso de erro na logica inicial
-        boolean vizinhoCor1 = false;
 
         //verifica se os vizinhos ja tem alguma cor marcada, para definir a cor do vertice atual de acordo
         //se tem vizinho de cor 1, 2 por exemplo: o vertice atual terá cor 3
         for(int i = 0; i < vizinhos.size(); i++){
             Vertice verticeVizinho = vizinhos.get(i);
 
-            if(verticeVizinho.getCor() == Color.red){
+            if(verticeVizinho.getCor() == Color.red && vertice.getCor() == Color.red){
                 selecionarCor = 2;
-                vizinhoCor1 = true;
+                vertice.setCor(Color.green);
             }
-            else if(verticeVizinho.getCor() == Color.green){
+            if(verticeVizinho.getCor() == Color.green && vertice.getCor() == Color.green){
                 selecionarCor = 3;
+                vertice.setCor(Color.blue);
             }
-            else if(verticeVizinho.getCor() == Color.blue){
+            if(verticeVizinho.getCor() == Color.blue && vertice.getCor() == Color.blue){
                 selecionarCor = 4;
+                vertice.setCor(Color.cyan);
             }
 
             //o numero cromatico será definido na classe grafo, para poder ser exibido na chamada do alert no grafoGUI
@@ -306,30 +347,12 @@ public class Grafo extends GrafoBase {
             }
         }
 
-        //seta cor do vertice
-        if(selecionarCor == 1){
-            vertice.setCor(Color.RED);
-        }
-        else if(selecionarCor == 2){
-            vertice.setCor(Color.GREEN);
-        }
-        else if(selecionarCor == 3){
-            vertice.setCor(Color.BLUE);
-        }
-        else if(selecionarCor == 4){
-            vertice.setCor(Color.CYAN);
-            //pode acontecer de ter vizinho de cor verde, azul e ciano. nesse caso, iria falhar e colocar ciano.
-            //corrige falha e seta de cor vermelha como deveria ser
-            if(vizinhoCor1 == false){
-                vertice.setCor(Color.RED);
-            }
-        }
-
         //tudo certo com o vertice, prosseggue atraves da profundidade para verificar os outros
         for(int i = 0; i < getN(); i++){
             Aresta aresta = getAresta(v, i);
 
             if(aresta != null && !visitado[i]){
+                aresta.setCor(Color.ORANGE);
                 numeroCromatico(i);
             }
         }
