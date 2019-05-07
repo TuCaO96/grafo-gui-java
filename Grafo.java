@@ -20,7 +20,7 @@ public class Grafo extends GrafoBase {
     public int custoTotal;
     public int custoMinimo;
 
-    public void AGM(int v) {
+    public int AGM(int v) {
         //cria lista de vertices visitados
         ArrayList<Integer> listaVisitados = new ArrayList<>();
         //adiciona o vertice selecionado como primeiro visitado
@@ -66,9 +66,11 @@ public class Grafo extends GrafoBase {
             }
         }
 
+
+        return this.custoTotal;
     }
 
-    public void caminhoMinimo(int i, int j) {
+    public int caminhoMinimo(int i, int j) {
         Vertice v1 = getVertice(i);
         Vertice v2 = getVertice(j);
 
@@ -153,6 +155,8 @@ public class Grafo extends GrafoBase {
         });
 
         this.setExibirPesos(true);
+
+        return this.custoMinimo;
     }
 
     public boolean isArvore(){
@@ -267,7 +271,7 @@ public class Grafo extends GrafoBase {
         }
     }
 
-    public void numeroCromatico(int v) {
+    public int numeroCromatico(int v) {
         visitado[v] = true;
 
         Vertice vertice = getVertice(v);
@@ -327,6 +331,8 @@ public class Grafo extends GrafoBase {
                 numeroCromatico(i);
             }
         }
+
+        return this.numCromatico;
     }
 
     public void profundidade(int v) {
