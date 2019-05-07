@@ -165,13 +165,11 @@ public abstract class GrafoBase extends JPanel implements MouseListener {
 	}
 	
 	public boolean adicionouVertice(Vertice v) {
-		System.out.println("[DEBUG] => Novo vertice: " + v);
 		//v.setRotulo(JOptionPane.showInputDialog("Digite o r�tulo do v�rtice:"));
 		return true;
 	}
 
 	public boolean adicionouAresta(Aresta a) {
-		System.out.println("[DEBUG] => Nova aresta");
 		//a.setPeso(Integer.parseInt(JOptionPane.showInputDialog("Digite o peso:")));
 		return true;
 	}

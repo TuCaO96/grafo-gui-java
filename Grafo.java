@@ -60,13 +60,6 @@ public class Grafo extends GrafoBase {
 
             if(proximoVertice != null){
                 //colore aresta e vertice visitados
-                System.out.println("Aresta mais leve:");
-                System.out.println(arestaMaisLeve.getPeso());
-                System.out.println("Veio do vertice:");
-                System.out.println(veioDoVertice.getNum());
-                System.out.println("Vertice mais leve:");
-                System.out.println(proximoVertice.getNum());
-                System.out.println("------------------");
                 arestaMaisLeve.setCor(Color.RED);
                 proximoVertice.setCor(Color.RED);
                 //adiciona vertice visitado à lista
