@@ -34,22 +34,25 @@ public class Grafo extends GrafoBase {
         while(listaVisitados.size() < getN()){
             Aresta arestaMaisLeve = null;
             Vertice proximoVertice = null;
+            Vertice veioDoVertice = null;
             int menorPeso = Integer.MAX_VALUE;
 
             //itera por cada vertice visitado
             for(int i = 0; i < listaVisitados.size(); i++){
-                ArrayList<Vertice> vizinhos = getAdjacentes(i);
+                Vertice verticeAtual = listaVisitados.get(i);
+                ArrayList<Vertice> vizinhos = getAdjacentes(verticeAtual.getNum());
                 //pega vizinhos do vertice na iteração atual
                 for(int j = 0; j < vizinhos.size(); j++){
                     //nao pegar peso de aresta do proprio vertice nem de vertice que ja foi visitado
                     if(!listaVisitados.contains(vizinhos.get(j))){
-                        Aresta arestaAtual = getAresta(i, vizinhos.get(j).getNum());
+                        Aresta arestaAtual = getAresta(verticeAtual.getNum(), vizinhos.get(j).getNum());
                         //pega aresta com menor peso
                         if(arestaAtual != null && (arestaAtual.getPeso() < menorPeso)){
                             menorPeso = arestaAtual.getPeso();
 
                             arestaMaisLeve = arestaAtual;
                             proximoVertice = vizinhos.get(j);
+                            veioDoVertice = verticeAtual;
                         }
                     }
                 }
@@ -57,6 +60,13 @@ public class Grafo extends GrafoBase {
 
             if(proximoVertice != null){
                 //colore aresta e vertice visitados
+                System.out.println("Aresta mais leve:");
+                System.out.println(arestaMaisLeve.getPeso());
+                System.out.println("Veio do vertice:");
+                System.out.println(veioDoVertice.getNum());
+                System.out.println("Vertice mais leve:");
+                System.out.println(proximoVertice.getNum());
+                System.out.println("------------------");
                 arestaMaisLeve.setCor(Color.RED);
                 proximoVertice.setCor(Color.RED);
                 //adiciona vertice visitado à lista
