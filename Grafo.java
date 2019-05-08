@@ -148,13 +148,16 @@ public class Grafo extends GrafoBase {
 
         //colore vertices do caminho minimo
         caminhoMinimo.forEach(vertice -> {
+            //color vertices do caminho minimo
             vertice.setCor(Color.RED);
 
+            //define cor das arestas do caminho minimo
             if(vertice.getAnterior() != null){
                 Aresta aresta = getAresta(vertice.getNum(), vertice.getAnterior().getNum());
                 aresta.setCor(Color.RED);
             }
 
+            //se chegou no fim do caminho minimo, pega sua estimativa
             if(vertice.getNum() == v2.getNum()){
                 custoMinimo = vertice.getEstimativa();
             }
