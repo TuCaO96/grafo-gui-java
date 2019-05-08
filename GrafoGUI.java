@@ -178,7 +178,7 @@ public class GrafoGUI extends JFrame implements ActionListener {
 			g.visitado= new boolean[g.getN()];
 
 			if(g.getVerticeMarcado() == null){
-				JOptionPane.showMessageDialog(this, "É necessário marcar o vértice inicial!");
+				JOptionPane.showMessageDialog(this, "Eh necessário marcar o vértice inicial!");
 				return;
 			}
 
@@ -187,7 +187,7 @@ public class GrafoGUI extends JFrame implements ActionListener {
 
 		if(e.getSource() == mCaminhoMinimo){
 			if(g.getVerticeMarcado() == null){
-				JOptionPane.showMessageDialog(this, "É necessário marcar o vértice inicial!");
+				JOptionPane.showMessageDialog(this, "Eh necessário marcar o vértice inicial!");
 				return;
 			}
 
@@ -207,7 +207,7 @@ public class GrafoGUI extends JFrame implements ActionListener {
 			g.visitado= new boolean[g.getN()];
 
 			if(g.getVerticeMarcado() == null){
-				JOptionPane.showMessageDialog(this, "É necessário marcar o vértice inicial!");
+				JOptionPane.showMessageDialog(this, "Eh necessário marcar o vértice inicial!");
 				return;
 			}
 
@@ -263,10 +263,10 @@ public class GrafoGUI extends JFrame implements ActionListener {
 		if (e.getSource() == mEuleriano) {
 			
 			if(g.isEuleriano()) {
-				JOptionPane.showMessageDialog(this, "É Euleriano");
+				JOptionPane.showMessageDialog(this, "Eh Euleriano");
 			}
 			else{
-				JOptionPane.showMessageDialog(this, "Não é Euleriano");
+				JOptionPane.showMessageDialog(this, "Não eh Euleriano");
 			}
 			
 		}
@@ -274,7 +274,7 @@ public class GrafoGUI extends JFrame implements ActionListener {
 		if(e.getSource() == mProfundidade){
 
 			if(g.getVerticeMarcado() == null){
-				JOptionPane.showMessageDialog(this, "É necessário marcar o vértice inicial!");
+				JOptionPane.showMessageDialog(this, "Eh necessário marcar o vertice inicial!");
 				return;
 			}
 
@@ -288,7 +288,7 @@ public class GrafoGUI extends JFrame implements ActionListener {
 		if(e.getSource() == mLargura){
 
 			if(g.getVerticeMarcado() == null){
-				JOptionPane.showMessageDialog(this, "É necessário marcar o vértice inicial!");
+				JOptionPane.showMessageDialog(this, "Eh necessário marcar o vértice inicial!");
 				return;
 			}
 
@@ -301,10 +301,10 @@ public class GrafoGUI extends JFrame implements ActionListener {
 
 		if (e.getSource() == mUnicursal) {
 			if(g.isUnicursal()){
-                JOptionPane.showMessageDialog(this, "É Unicursal");
+                JOptionPane.showMessageDialog(this, "Eh Unicursal");
             }
 			else{
-                JOptionPane.showMessageDialog(this, "Não é Unicursal");
+                JOptionPane.showMessageDialog(this, "Não eh Unicursal");
             }
 		}
 

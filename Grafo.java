@@ -175,9 +175,18 @@ public class Grafo extends GrafoBase {
         largura(0);
 
         //se algum vertice nao tiver sido visitado, entao grafo não é arvore
-        for(int i = 0; i < getN(); i++){
-            if(!visitado[i]){
+        for(int i = 0; i < getN(); i++) {
+            if (!visitado[i]) {
                 return false;
+            }
+        }
+
+        for(int i = 0; i < getN(); i++){
+            for(int j = 0; j < getN(); j++){
+                if(getAresta(i, j) != null &&
+                        getAresta(i, j).getCor() == Color.ORANGE){
+                    return false;
+                }
             }
         }
 
@@ -199,7 +208,7 @@ public class Grafo extends GrafoBase {
         int cont = 2;
 
         for (int i = 0; i < this.getN(); i++) {
-            if (grau(i) % 2 != 0) {
+            if (grau(i) % 2 == 0) {
                 cont--;
             }
         }
