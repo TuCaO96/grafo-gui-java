@@ -191,7 +191,15 @@ public class GrafoGUI extends JFrame implements ActionListener {
 				return;
 			}
 
-			JOptionPane.showMessageDialog(this, "Custo Minimo: " + g.caminhoMinimo(0, g.getVerticeMarcado().getNum()));
+			String numString = JOptionPane.showInputDialog(
+					this,
+					"Qual sera o numero do vertice final?",
+					0
+			);
+
+			int num = Integer.parseInt(numString);
+
+			JOptionPane.showMessageDialog(this, "Custo Minimo: " + g.caminhoMinimo(g.getVerticeMarcado().getNum(), num));
 			g.setVerticeMarcado(null);
 		}
 

@@ -150,6 +150,11 @@ public class Grafo extends GrafoBase {
         caminhoMinimo.forEach(vertice -> {
             vertice.setCor(Color.RED);
 
+            if(vertice.getAnterior() != null){
+                Aresta aresta = getAresta(vertice.getNum(), vertice.getAnterior().getNum());
+                aresta.setCor(Color.RED);
+            }
+
             if(vertice.getNum() == v2.getNum()){
                 custoMinimo = vertice.getEstimativa();
             }
